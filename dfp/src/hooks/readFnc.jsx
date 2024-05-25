@@ -11,7 +11,7 @@ const fiverrpunkAddress = "0x07E577C64ddA84B130a6F813b1bF73fe51EC503D";
 //   : configs.address.mainnet;
 
 const WETHContract = {
-  address: contractAddress,
+  address: WETHAddress,
   abi: abiWETH,
 };
 
