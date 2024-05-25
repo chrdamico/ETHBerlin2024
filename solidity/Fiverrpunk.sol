@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "./Ownable.sol";
 import "./IFiverrpunk.sol";
 import "./TrustComputer.sol";
 
@@ -62,7 +62,7 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
     //                        CONSTRUCTOR
     // =============================================================
 
-    constructor(TrustComputer _trustAlgorithm) {
+    constructor(TrustComputer _trustAlgorithm) Ownable(msg.sender) {
         if (address(_trustAlgorithm) == address(0)) revert ZeroAddress();
         trustAlgorithm = _trustAlgorithm;
         DAI = IERC20(0x68194a729C2450ad26072b3D33ADaCbcef39D574);
