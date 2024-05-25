@@ -8,6 +8,8 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './DataViewWrapper.css';
+import { useAccount, useBalance } from "wagmi";
+
 
 const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
     const [items, setItems] = useState([]);
@@ -17,6 +19,8 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
 
     const [visible, setVisible] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);
+
+    const { address, isConnected } = useAccount();
 
     const showConfirm = (item) => {
         setCurrentItem(item);
@@ -35,7 +39,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(
                     {
-                        executor_address:  "0x1311Cf43001af2a65D3B8222d0C3C14Fd0000",
+                        executor_address: address,
                         task_id: currentItem.id
                     }
                 )
