@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TabMenu} from 'primereact/tabmenu';
 import DataViewWrapper from './DataViewWrapper';
+import TaskSubmissionForm from "./TaskSubmissionForm.jsx";
 
 const MyTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -18,6 +19,9 @@ const MyTabs = () => {
                 onTabChange={(e) => setActiveIndex(e.index)}
             />
             <div className="tab-content">
+                { tabs[activeIndex].type == "clientBoard"  &&
+                    <TaskSubmissionForm />
+                }
                 <DataViewWrapper apiEndpoint={tabs[activeIndex].apiEndpoint} />
             </div>
         </div>
