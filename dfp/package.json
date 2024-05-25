@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.39.0",
+    "@web3modal/wagmi": "^4.2.2",
     "primeicons": "^7.0.0",
     "primereact": "^10.6.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "viem": "^2.12.1",
+    "wagmi": "^2.9.7"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
