@@ -1,16 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {TabMenu} from 'primereact/tabmenu';
+import React, { useState, useEffect } from 'react';
+import { TabMenu } from 'primereact/tabmenu';
 import DataViewWrapper from './DataViewWrapper';
 import TaskSubmissionForm from "./TaskSubmissionForm.jsx";
+import './MyTabs.css';  // Import the CSS file
 
 const MyTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [refresh, setRefresh] = useState(false);
 
     const tabs = [
-        { label: 'Task Board', type: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
-        { label: 'My tasks', type: "clientBoard", icon: 'pi pi-fw pi-calendar', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
-        { label: 'My jobs', type: "executorBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
+        { label: 'Task Board', listType: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
+        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-calendar', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
+        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
     ];
 
     const handleRefresh = () => {
@@ -29,10 +30,12 @@ const MyTabs = () => {
                 onTabChange={(e) => setActiveIndex(e.index)}
             />
             <div className="tab-content">
-                { tabs[activeIndex].type == "clientBoard" &&
-                    <TaskSubmissionForm onTaskSubmit={handleRefresh} />
+                {tabs[activeIndex].listType == "clientBoard" &&
+                    <div className="task-submission-form">
+                        <TaskSubmissionForm onTaskSubmit={handleRefresh} />
+                    </div>
                 }
-                <DataViewWrapper apiEndpoint={tabs[activeIndex].apiEndpoint} refresh={refresh} />
+                <DataViewWrapper apiEndpoint={tabs[activeIndex].apiEndpoint} refresh={refresh} listType={tabs[activeIndex].listType}/>
             </div>
         </div>
     );

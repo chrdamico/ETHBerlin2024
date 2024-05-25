@@ -1,0 +1,14 @@
+.tab-content {
+    display: flex;
+    flex-direction: column;}
+
+.task-submission-form {
+    align-self: flex-start; /* This justifies the form to the left */
+    margin-top: 10px; /* This adds space above the form */
+    margin-bottom: 10px; /* This adds space below the form */
+}
+
+.data-view-wrapper {
+    margin-top: 10px; /* This adds space above the data view */
+    margin-bottom: 10px; /* This adds space below the data view */
+}

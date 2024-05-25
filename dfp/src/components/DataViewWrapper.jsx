@@ -9,7 +9,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './DataViewWrapper.css';
 
-const DataViewWrapper = ({ apiEndpoint, refresh, type}) => {
+const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
     const [items, setItems] = useState([]);
     const [layout, setLayout] = useState('list');
     const [loading, setLoading] = useState(true);
@@ -113,9 +113,11 @@ const DataViewWrapper = ({ apiEndpoint, refresh, type}) => {
                             <div className="p-col-12 p-md-12" style={{ textAlign: 'left', marginTop: '10px' }}>
                                 <strong>Reputation Score:</strong> 8.8
                             </div>
-                            <div style={{ padding: '10px' }}>
-                                <Button label="Take the job" icon="pi pi-plus" id={"confirm" + item.id} onClick={() => showConfirm(item)} />
-                            </div>
+                            {listType == 'board' && (
+                                <div style={{ padding: '10px' }}>
+                                    <Button label="Take the job" icon="pi pi-plus" id={"confirm" + item.id} onClick={() => showConfirm(item)} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </Panel>
