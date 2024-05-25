@@ -11,7 +11,9 @@ class TaskService:
 
     @classmethod
     def list_tasks(cls) -> List[dict]:
-        return [model_to_dict(task) for task in Task.objects.all().order_by("-created_at")]
+        return [
+            model_to_dict(task) for task in Task.objects.filter(executor_address__isnull=True).order_by("-created_at")
+        ]
 
     @classmethod
     def client_list(cls, address: str) -> List[dict]:
