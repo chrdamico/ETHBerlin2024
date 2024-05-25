@@ -7,31 +7,31 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './DataViewWrapper.css';
 
-const DataViewWrapper = ({ apiEndpoint }) => {
+const DataViewWrapper = ({ apiEndpoint, refresh }) => {
     const [items, setItems] = useState([]);
     const [layout, setLayout] = useState('list');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch(apiEndpoint);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setItems(data["items"] || []);
-            } catch (err) {
-                setError(err);
+    const fetchData = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(apiEndpoint);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-            setLoading(false);
-        };
+            const data = await response.json();
+            setItems(data["items"] || []);
+        } catch (err) {
+            setError(err);
+        }
+        setLoading(false);
+    };
 
+    useEffect(() => {
         fetchData();
-    }, [apiEndpoint]);
+    }, [apiEndpoint, refresh]);
 
     const itemTemplate = (item) => {
         return (

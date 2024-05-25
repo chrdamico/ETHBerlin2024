@@ -4,14 +4,13 @@ import { Calendar } from 'primereact/calendar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
 import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
 import './TaskSubmissionForm.css'; // Import the custom CSS file
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css'; // this is important for the icons
 
-const TaskSubmissionForm = () => {
+const TaskSubmissionForm = ({ onTaskSubmit }) => {
     const [taskName, setTaskName] = useState('');
     const [deadlineDate, setDeadlineDate] = useState(null);
     const [bonusDate, setBonusDate] = useState(null);
@@ -52,8 +51,10 @@ const TaskSubmissionForm = () => {
                 .then(data => {
                     console.log("Task created");
                     setIsDialogVisible(false); // Close the dialog on successful submission
+                    if (onTaskSubmit) {
+                        onTaskSubmit(); // Notify the parent component
+                    }
                 });
-
         }
     };
 
