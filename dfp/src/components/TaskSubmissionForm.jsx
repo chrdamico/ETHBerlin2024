@@ -49,7 +49,10 @@ const TaskSubmissionForm = () => {
             };
             fetch('http://0.0.0.0:8000/api/task/create/', requestOptions)
                 .then(response => response.json())
-                .then(data =>  console.log("Task created"));
+                .then(data => {
+                    console.log("Task created");
+                    setIsDialogVisible(false); // Close the dialog on successful submission
+                });
 
         }
     };
