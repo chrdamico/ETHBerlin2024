@@ -13,9 +13,9 @@ const MyTabs = () => {
     const { address, isConnected } = useAccount();
 
     const tabs = [
-        { label: 'Task Board', listType: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
-        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/'+address},
-        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-briefcase', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/'+address },
+        { label: 'Task Board', listType: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://localhost:8000/api/board/list/' },
+        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://localhost:8000/api/board/client/'+address},
+        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-briefcase', apiEndpoint: 'http://localhost:8000/api/board/executor/'+address },
     ];
 
     const handleRefresh = () => {

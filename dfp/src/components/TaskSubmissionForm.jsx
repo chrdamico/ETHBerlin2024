@@ -63,7 +63,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
           bonus_date: bonusDate,
         }),
       };
-      fetch("http://0.0.0.0:8000/api/task/create/", requestOptions)
+      fetch("http://localhost:8000/api/task/create/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           console.log("Task created");

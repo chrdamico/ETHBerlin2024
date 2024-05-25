@@ -44,7 +44,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType, onTaskAccept}) => {
                     }
                 )
             };
-            fetch('http://0.0.0.0:8000/api/task/take/', requestOptions)
+            fetch('http://localhost:8000/api/task/take/', requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Task taken");

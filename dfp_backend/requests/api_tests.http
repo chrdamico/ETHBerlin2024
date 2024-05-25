@@ -1,17 +1,17 @@
 ###
-GET http://0.0.0.0:8000/api/board/list/
+GET http://localhost:8000/api/board/list/
 Content-Type: application/json
 Accept: application/json
 
 ####
 
-GET http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA/
+GET http://localhost:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA/
 Content-Type: application/json
 Accept: application/json
 
 ####
 
-GET http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14FdaA/
+GET http://localhost:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14FdaA/
 Content-Type: application/json
 Accept: application/json
 
@@ -32,7 +32,7 @@ Accept: application/json
 }
 
 ####
-POST http://0.0.0.0:8000/api/task/update/
+POST http://localhost:8000/api/task/update/
 Content-Type: application/json
 Accept: application/json
 
@@ -47,7 +47,7 @@ Accept: application/json
 }
 
 ####
-POST http://0.0.0.0:8000/api/task/take/
+POST http://localhost:8000/api/task/take/
 Content-Type: application/json
 Accept: application/json
 
