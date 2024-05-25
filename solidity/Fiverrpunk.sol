@@ -45,6 +45,7 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
      * @inheritdoc IFiverrpunk
      */
     mapping(address => uint256) public override pendingReqMap;
+
     /**
      * @inheritdoc IFiverrpunk
      */
@@ -56,7 +57,20 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
 
     mapping(address => Reputation) private _devTrustMeter;
 
-    // dev functions missing
+    /**
+     * @inheritdoc IFiverrpunk
+     */
+    mapping(address => mapping(uint256 => uint256)) public override devIdMap;
+
+    /**
+     * @inheritdoc IFiverrpunk
+     */
+    mapping(address => uint256) public override acceptedReqMap;
+
+    /**
+     * @inheritdoc IFiverrpunk
+     */
+    mapping(uint256 => uint256) public override idDevMap;
 
     // =============================================================
     //                        CONSTRUCTOR
@@ -69,6 +83,8 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
     }
 
     // =============================================================
+    //                        MODIFIERS
+    // =============================================================
 
     modifier onlyDisputant() {
         require(
@@ -79,7 +95,7 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
     }
 
     // =============================================================
-    //                        PUBLIC WRITE
+    //                        PUBLIC WRITE FUNCTIONS
     // =============================================================
 
     function createRequest(
@@ -98,6 +114,8 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
             require(requestTiming > laudableTiming, "invalid laudable timing");
             require(prize > 0, "missing prize");
         }
+        require(requiredTrust < 100, "trust too high");
+
         DAI.transferFrom(msg.sender, address(this), value + prize);
         _requestMap[lastRequestId] = Request({
             proposer: msg.sender,
@@ -128,6 +146,12 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
         req.dev = msg.sender;
         req.startTime = block.timestamp;
         req.status = 1;
+
+        uint256 count = acceptedReqMap[msg.sender];
+        idDevMap[id] = count;
+        devIdMap[msg.sender][count] = id;
+        acceptedReqMap[msg.sender]++;
+
         emit RequestAssigned(id);
     }
 
@@ -214,17 +238,20 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
         require(req.startTime > 0, "request not started");
         require(req.status == 1, "request must be active");
         req.status = 2;
+        Reputation storage proposerRep = _proposerTrustMeter[req.proposer];
+        Reputation storage devRep = _devTrustMeter[req.proposer];
 
         uint256 totalValue = req.value;
         if (block.timestamp < req.laudableTiming) {
             totalValue += req.prize;
+            proposerRep.totalPrize += req.prize;
+            devRep.totalPrize += req.prize;
         }
+        proposerRep.totalValue += totalValue;
+        devRep.totalValue += totalValue;
         DAI.transfer(req.dev, totalValue);
         _decreaseRequestCount(id, req.proposer);
-
-        Reputation storage rep = _proposerTrustMeter[req.proposer];
-        rep.totalPrize += req.prize;
-        rep.totalValue += totalValue;
+        _decreaseAcceptedCount(id, req.dev);
         emit RequestFinalized(id);
     }
 
@@ -252,8 +279,11 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
         );
         require(block.timestamp > req.requestTiming, "wait for deadline");
         req.status = 2;
-        Reputation storage rep = _proposerTrustMeter[req.proposer];
-        rep.disputed++;
+
+        Reputation storage proposerRep = _proposerTrustMeter[msg.sender];
+        proposerRep.disputed++;
+        Reputation storage devRep = _devTrustMeter[msg.sender];
+        devRep.disputed++;
         emit RequestDisputed(id);
     }
 
@@ -275,19 +305,31 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
         require(req.status == 2, "request not disputed");
         require(result == 0 || result == 1, "invalid result");
         req.status = 3;
-        Reputation storage rep = _proposerTrustMeter[req.proposer];
+
+        Reputation storage proposerRep = _proposerTrustMeter[req.proposer];
+        Reputation storage devRep = _devTrustMeter[req.dev];
+
         if (result == 0) {
             DAI.transfer(req.dev, req.value);
-            rep.totalValue += req.value;
+            proposerRep.won++;
+            devRep.lost++;
+            proposerRep.totalValue += req.value;
         } else {
             DAI.transfer(req.proposer, req.value + req.prize);
-            rep.totalValue += req.value + req.prize;
+            proposerRep.lost++;
+            devRep.won++;
+            devRep.totalValue += req.value;
         }
+
         _decreaseRequestCount(id, req.proposer);
+        _decreaseAcceptedCount(id, req.dev);
+
         emit RequestFinalized(id);
     }
 
-    // INTERNAL FUNCTIONS
+    // =============================================================
+    //                        INTERNAL FUNCTIONS
+    // =============================================================
 
     function _decreaseRequestCount(uint256 id, address proposer) internal {
         uint256 count = pendingReqMap[proposer];
@@ -299,6 +341,16 @@ contract Fiverrpunk is Ownable, IFiverrpunk {
         idProposerMap[id] = 0;
         proposerIdMap[proposer][count - 1] = 0;
         pendingReqMap[proposer]--;
+    }
+
+    function _decreaseAcceptedCount(uint256 id, address dev) internal {
+        uint256 count = acceptedReqMap[dev];
+        if (count > 1) {
+            devIdMap[dev][idDevMap[id]] = devIdMap[dev][count - 1];
+        }
+        idDevMap[id] = 0;
+        devIdMap[dev][count - 1] = 0;
+        acceptedReqMap[dev]--;
     }
 
     // =============================================================

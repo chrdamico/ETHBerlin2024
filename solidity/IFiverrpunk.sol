@@ -35,7 +35,7 @@ interface IFiverrpunk {
         uint256 laudableTiming; // time within which one acceptor is entitled to a prize
         uint256 prize; // prize in escrow
         uint256 startTime; // 0 is not accepted, else the time of acceptance
-        uint256 status; // 0 = pending, 1= accepted, 2 = disputed, 3 = closed
+        uint256 status; // 0 = pending, 1 = accepted, 2 = disputed, 3 = closed
         uint256 requiredTrust; // trust required to accept the request
     }
 
@@ -151,30 +151,30 @@ interface IFiverrpunk {
             uint256 totalValue
         );
 
-    // /**
-    //  * @notice Getter function to access devIdMap mapping values.
-    //  * @param key1 The address key used in the first level of the mapping.
-    //  * @param key2 The uint256 key used in the second level of the mapping.
-    //  * @return The uint256 value associated with the provided keys.
-    //  */
-    // function devIdMap(
-    //     address key1,
-    //     uint256 key2
-    // ) external view returns (uint256);
+    /**
+     * @notice Getter function to access devIdMap mapping values.
+     * @param dev address.
+     * @param position of a request in the proposal requests count.
+     * @return id of the proposal.
+     */
+    function devIdMap(
+        address dev,
+        uint256 position
+    ) external view returns (uint256);
 
-    // /**
-    //  * @notice Getter function to access acceptedReqMap mapping values.
-    //  * @param key The address key used to look up the uint256 value in the mapping.
-    //  * @return The uint256 value associated with the provided key.
-    //  */
-    // function acceptedReqMap(address key) external view returns (uint256);
+    /**
+     * @notice Getter function to access acceptedReqMap mapping values.
+     * @param dev address.
+     * @return number of pending requests of dev.
+     */
+    function acceptedReqMap(address dev) external view returns (uint256);
 
-    // /**
-    //  * @notice Getter function to access idDevMap mapping values.
-    //  * @param key The uint256 key used to look up the uint256 value in the mapping.
-    //  * @return The uint256 value associated with the provided key.
-    //  */
-    // function idDevMap(uint256 key) external view returns (uint256);
+    /**
+     * @notice Getter function to access idDevMap mapping values.
+     * @param id of a request.
+     * @return position in dev requestsCount.
+     */
+    function idDevMap(uint256 id) external view returns (uint256);
 
     // =============================================================
     //                            EVENTS
