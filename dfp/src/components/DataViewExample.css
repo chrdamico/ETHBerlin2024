@@ -1,0 +1,38 @@
+/* DataViewExample.css */
+.item-panel {
+    margin-bottom: 20px;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.item-container {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.scroll-panel {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nickname {
+    /* Additional styling for nickname if needed */
+}
+
+
+.left-align {
+    text-align: left !important;
+}
+
