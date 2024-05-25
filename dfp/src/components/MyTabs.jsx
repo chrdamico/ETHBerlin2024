@@ -10,8 +10,8 @@ const MyTabs = () => {
 
     const tabs = [
         { label: 'Task Board', listType: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
-        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-calendar', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
-        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
+        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
+        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-briefcase', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
     ];
 
     const handleRefresh = () => {
