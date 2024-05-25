@@ -2,16 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { DataView } from 'primereact/dataview';
 import { Panel } from 'primereact/panel';
 import { ScrollPanel } from 'primereact/scrollpanel';
+import { Button } from 'primereact/button';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './DataViewWrapper.css';
 
-const DataViewWrapper = ({ apiEndpoint, refresh }) => {
+const DataViewWrapper = ({ apiEndpoint, refresh, type }) => {
     const [items, setItems] = useState([]);
     const [layout, setLayout] = useState('list');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [visible, setVisible] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
+
+    const showConfirm = (item) => {
+        setCurrentItem(item);
+        setVisible(true);
+    };
+
+    const onHide = () => {
+        setVisible(false);
+        setCurrentItem(null);
+    };
+
+    const accept = () => {
+        // Add your accept logic here
+        console.log('Accepted', currentItem);
+        onHide();
+    };
+
+    const reject = () => {
+        // Add your reject logic here
+        console.log('Rejected', currentItem);
+        onHide();
+    };
 
     const fetchData = async () => {
         setLoading(true);
@@ -35,7 +62,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh }) => {
 
     const itemTemplate = (item) => {
         return (
-            <div className="p-col-12 item-container">
+            <div className="p-col-12 item-container" key={item.id}>
                 <Panel header={
                     <div className="header-content">
                         <span className="nickname">{item.task_title}</span></div>
@@ -44,7 +71,8 @@ const DataViewWrapper = ({ apiEndpoint, refresh }) => {
                     <div className="p-grid">
                         <div className="p-col-12 p-md-12">
                             <strong>Description:</strong>
-                            <ScrollPanel style={{ width: '100%', height: '100px', border: '1px solid #ccc', padding: '10px' }}>
+                            <ScrollPanel
+                                style={{ width: '100%', height: '100px', border: '1px solid #ccc', padding: '10px' }}>
                                 <div className="left-align">
                                     {item.task_description}
                                 </div>
@@ -66,8 +94,13 @@ const DataViewWrapper = ({ apiEndpoint, refresh }) => {
                                 <strong>Bonus Payment Date:</strong> {new Date(item.bonus_date).toLocaleString()}
                             </div>
                         </div>
-                        <div className="p-col-12 p-md-12" style={{ textAlign: 'left', marginTop: '10px' }}>
-                            <strong>Reputation Score:</strong> 8.8
+                        <div className="p-col-12 p-md-12 item-footer">
+                            <div className="p-col-12 p-md-12" style={{ textAlign: 'left', marginTop: '10px' }}>
+                                <strong>Reputation Score:</strong> 8.8
+                            </div>
+                            <div style={{ padding: '10px' }}>
+                                <Button label="Take the job" icon="pi pi-plus" id={"confirm" + item.id} onClick={() => showConfirm(item)} />
+                            </div>
                         </div>
                     </div>
                 </Panel>
@@ -86,6 +119,15 @@ const DataViewWrapper = ({ apiEndpoint, refresh }) => {
     return (
         <div style={{ width: '100%', margin: '0 auto' }}>
             <DataView value={items} layout={layout} itemTemplate={itemTemplate} />
+            <ConfirmDialog
+                visible={visible}
+                onHide={onHide}
+                message="Are you sure you want to proceed?"
+                header="Confirmation"
+                icon="pi pi-exclamation-triangle"
+                accept={accept}
+                reject={reject}
+            />
         </div>
     );
 };
