@@ -62,7 +62,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
     const minDate = new Date(); // Today's date
 
     const renderDialog = () => (
-        <Dialog header="Task Input" visible={isDialogVisible} style={{ width: '50vw' }} onHide={() => setIsDialogVisible(false)}>
+        <Dialog header="Request a new task" visible={isDialogVisible} style={{ width: '50vw' }} onHide={() => setIsDialogVisible(false)}>
             <div className="p-fluid">
                 <div className="p-field">
                     <label htmlFor="taskName" className={classNames({'p-error': isFieldValid(taskName)})}>Task Name</label>
@@ -104,7 +104,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
                 </div>
 
                 <div className="p-field">
-                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Prize</label>
+                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Offered money</label>
                     <InputNumber id="prize" value={prize} onValueChange={(e) => setPrize(e.value)} mode="decimal" className={classNames({'p-invalid': isFieldValid(prize)})} />
                     {isFieldValid(prize) && <small className="p-error">Prize is required.</small>}
                 </div>
@@ -115,7 +115,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
 
     return (
         <div>
-            <Button label="Open Task Form" onClick={() => setIsDialogVisible(true)} />
+            <Button label="Request a new task" onClick={() => setIsDialogVisible(true)} />
             {renderDialog()}
         </div>
     );

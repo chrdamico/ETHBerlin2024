@@ -30,7 +30,7 @@ const MyTabs = () => {
                 onTabChange={(e) => setActiveIndex(e.index)}
             />
             <div className="tab-content">
-                {tabs[activeIndex].listType == "clientBoard" &&
+                {(tabs[activeIndex].listType == "clientBoard" || tabs[activeIndex].listType == "board") &&
                     <div className="task-submission-form">
                         <TaskSubmissionForm onTaskSubmit={handleRefresh} />
                     </div>

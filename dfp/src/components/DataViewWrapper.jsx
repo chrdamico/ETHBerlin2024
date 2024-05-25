@@ -95,7 +95,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
                         </div>
                         <div className="p-col-12 p-md-12 item-footer">
                             <div className="p-col-6 p-md-6">
-                                <strong>Price:</strong> {item.price}
+                                <strong>Requested price:</strong> {item.price}
                             </div>
                             <div className="p-col-6 p-md-6">
                                 <strong>Crypto Address:</strong> {item.requester_address}
@@ -111,7 +111,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
                         </div>
                         <div className="p-col-12 p-md-12 item-footer">
                             <div className="p-col-12 p-md-12" style={{ textAlign: 'left', marginTop: '10px' }}>
-                                <strong>Reputation Score:</strong> 8.8
+                                <strong>Minimum required reputation Score:</strong> 8.8
                             </div>
                             {listType == 'board' && (
                                 <div style={{ padding: '10px' }}>
