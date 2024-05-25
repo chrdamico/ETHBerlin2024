@@ -26,6 +26,7 @@ class TaskService:
     @classmethod
     def create_task(cls, task_to_create: CreateTaskEntity) -> dict:
         task = Task.objects.create(
+            chain_task_id=task_to_create.chain_task_id,
             requester_address=task_to_create.requester_address,
             task_description=task_to_create.task_description,
             task_title=task_to_create.task_title,

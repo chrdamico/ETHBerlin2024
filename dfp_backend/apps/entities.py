@@ -6,7 +6,9 @@ from common.entities import BaseEntity
 
 @dataclass
 class CreateTaskEntity(BaseEntity):
+    chain_task_id: int
     requester_address: str
+    chain_task_id: int
     task_description: str
     task_title: str
     price: float
