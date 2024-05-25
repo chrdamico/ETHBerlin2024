@@ -20,7 +20,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
     const [submitted, setSubmitted] = useState(false);
     const [isDialogVisible, setIsDialogVisible] = useState(false);
 
-     const { address, isConnected } = useAccount();
+    const { address, isConnected } = useAccount();
 
     const handleSubmit = () => {
         setSubmitted(true);
@@ -44,7 +44,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
                         task_description: taskDescription,
                         task_title: taskName,
                         price: prize,
-                        task_chain_id: 798432,
+                        chain_task_id: 798432,
                         deadline:  deadlineDate,
                         bonus_date: bonusDate
                     }
