@@ -11,15 +11,15 @@ class TaskService:
 
     @classmethod
     def list_tasks(cls) -> List[dict]:
-        return [model_to_dict(task) for task in Task.objects.all().order_by("created_at")]
+        return [model_to_dict(task) for task in Task.objects.all().order_by("-created_at")]
 
     @classmethod
     def client_list(cls, address: str) -> List[dict]:
-        return [model_to_dict(task) for task in Task.objects.filter(requester_address=address).order_by("created_at")]
+        return [model_to_dict(task) for task in Task.objects.filter(requester_address=address).order_by("-created_at")]
 
     @classmethod
     def executor_list(cls, address: str) -> List[dict]:
-        return [model_to_dict(task) for task in Task.objects.filter(executor_address=address).order_by("created_at")]
+        return [model_to_dict(task) for task in Task.objects.filter(executor_address=address).order_by("-created_at")]
 
     @classmethod
     def create_task(cls, task_to_create: CreateTaskEntity) -> dict:
