@@ -39,7 +39,12 @@ const MyTabs = () => {
                         <TaskSubmissionForm onTaskSubmit={handleRefresh} />
                     </div>
                 }
-                <DataViewWrapper apiEndpoint={tabs[activeIndex].apiEndpoint} refresh={refresh} listType={tabs[activeIndex].listType}/>
+                <DataViewWrapper
+                    apiEndpoint={tabs[activeIndex].apiEndpoint}
+                    refresh={refresh}
+                    listType={tabs[activeIndex].listType}
+                    onTaskAccept={handleRefresh}
+                />
             </div>
         </div>
     );
