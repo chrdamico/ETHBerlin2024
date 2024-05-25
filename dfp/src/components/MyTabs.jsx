@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TabMenu } from 'primereact/tabmenu';
+import React, {useState} from 'react';
+import {TabMenu} from 'primereact/tabmenu';
 import DataViewWrapper from './DataViewWrapper';
 
 const MyTabs = () => {

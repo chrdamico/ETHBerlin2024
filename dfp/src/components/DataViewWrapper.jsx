@@ -84,7 +84,7 @@ const DataViewWrapper = ({ apiEndpoint }) => {
     }
 
     return (
-        <div style={{ width: '130%', margin: '0 auto' }}>
+        <div style={{ width: '100%', margin: '0 auto' }}>
             <DataView value={items} layout={layout} itemTemplate={itemTemplate} />
         </div>
     );
