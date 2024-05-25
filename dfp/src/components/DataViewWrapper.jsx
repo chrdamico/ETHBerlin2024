@@ -36,7 +36,11 @@ const DataViewWrapper = ({ apiEndpoint }) => {
     const itemTemplate = (item) => {
         return (
             <div className="p-col-12 item-container">
-                <Panel header={<div className="header-content"><span className="nickname">{item.requester_address}</span></div>} className="item-panel">
+                <Panel header={
+                    <div className="header-content">
+                        <span className="nickname">{item.task_title}</span></div>
+
+                } className="item-panel">
                     <div className="p-grid">
                         <div className="p-col-12 p-md-12">
                             <strong>Description:</strong>
@@ -48,7 +52,7 @@ const DataViewWrapper = ({ apiEndpoint }) => {
                         </div>
                         <div className="p-col-12 p-md-12 item-footer">
                             <div className="p-col-6 p-md-6">
-                                <strong>Price:</strong> 100
+                                <strong>Price:</strong> {item.price}
                             </div>
                             <div className="p-col-6 p-md-6">
                                 <strong>Crypto Address:</strong> {item.requester_address}

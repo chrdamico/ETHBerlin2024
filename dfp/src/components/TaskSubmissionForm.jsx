@@ -35,22 +35,21 @@ const TaskSubmissionForm = () => {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: 'React POST Request Example' })
+                body: JSON.stringify(
+                    {
+                        requester_address:  "0x1311Cf43001af2a65D3B8222d0C3C14FdaA",
+                        task_description: taskDescription,
+                        task_title: taskName,
+                        price: prize,
+                        deadline:  deadlineDate,
+                        bonus_date: bonusDate
+                    }
+                )
             };
-            fetch('https://reqres.in/api/posts', requestOptions)
+            fetch('http://0.0.0.0:8000/api/task/create/', requestOptions)
                 .then(response => response.json())
-                .then(data => this.setState({ postId: data.id }));
+                .then(data =>  console.log("Task created"));
 
-            fetch('http://0.0.0.0:8000/api/task/create/')
-                .then((res) => {
-                    console.log(res);
-                    return res.json();
-                })
-                .then((data) => {
-                    console.log(data);
-                    setItems(data["items"]);
-                });
-            // Perform any further actions with taskData
         }
     };
 
