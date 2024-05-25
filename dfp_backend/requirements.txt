@@ -1,3 +1,4 @@
 Django==5.0.6
 envparse==0.2.0
 black==24.4.2
+django-cors-headers==4.3.1

@@ -12,31 +12,15 @@ const DataViewExample = () => {
     const [layout, setLayout] = useState('list');
 
     useEffect(() => {
-        const fetchData = () => {
-            const data = [
-                {
-                    nickname: 'Item 1',
-                    description: 'Description for Item 1',
-                    price: 100,
-                    deadline: new Date(),
-                    bonus_payment_date: new Date(),
-                    crypto_address: '0x123456789abcdef',
-                    reputation_score: 4.5
-                },
-                {
-                    nickname: 'Item 2',
-                    description: 'Description for Item 2',
-                    price: 200,
-                    deadline: new Date(),
-                    bonus_payment_date: new Date(),
-                    crypto_address: '0xabcdef123456789',
-                    reputation_score: 3.8
-                },
-                // ... other items
-            ];
-            setItems(data);
-        };
-        fetchData();
+        fetch('http://0.0.0.0:8000/api/board/list/')
+            .then((res) => {
+                console.log(res);
+                return res.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setItems(data["items"]);
+            });
     }, []);
 
     const itemTemplate = (item) => {
@@ -44,7 +28,7 @@ const DataViewExample = () => {
             <div className="p-col-12 item-container">
                 <Panel header={
                     <div className="header-content">
-                        <span className="nickname">{item.nickname}</span></div>
+                        <span className="nickname">{item.requester_address}</span></div>
 
                 } className="item-panel">
                     <div className="p-grid">
@@ -53,17 +37,17 @@ const DataViewExample = () => {
                             <ScrollPanel
                                 style={{width: '100%', height: '100px', border: '1px solid #ccc', padding: '10px'}}>
                                 <div className="left-align">
-                                    {item.description}
+                                    {item.task_description}
                                 </div>
                             </ScrollPanel>
                         </div>
 
                         <div className="p-col-12 p-md-12 item-footer">
                             <div className="p-col-6 p-md-6">
-                                <strong>Price:</strong> ${item.price}
+                                <strong>Price:</strong> 100
                             </div>
                             <div className="p-col-6 p-md-6">
-                                <strong>Crypto Address:</strong> {item.crypto_address}
+                                <strong>Crypto Address:</strong> {item.requester_address}
                             </div>
                         </div>
                         <div className="p-col-12 p-md-12 item-footer">
@@ -71,12 +55,12 @@ const DataViewExample = () => {
                                 <strong>Deadline:</strong> {item.deadline.toLocaleString()}
                             </div>
                             <div className="p-col-6 p-md-6">
-                                <strong>Bonus Payment Date:</strong> {item.bonus_payment_date.toLocaleString()}
+                                <strong>Bonus Payment Date:</strong> {item.bonus_date.toLocaleString()}
                             </div>
                         </div>
 
                         <div className="p-col-12 p-md-12" style={{textAlign: 'left', marginTop: '10px'}}>
-                            <strong>Reputation Score:</strong> {item.reputation_score}
+                            <strong>Reputation Score:</strong> 8.8
                         </div>
                     </div>
                 </Panel>
