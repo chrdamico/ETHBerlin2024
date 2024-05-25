@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { TabMenu } from 'primereact/tabmenu';
 import DataViewWrapper from './DataViewWrapper';
 import TaskSubmissionForm from "./TaskSubmissionForm.jsx";
-import './MyTabs.css';  // Import the CSS file
+import './MyTabs.css';
+import {useAccount} from "wagmi";
+
+
 
 const MyTabs = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [refresh, setRefresh] = useState(false);
+    const { address, isConnected } = useAccount();
 
     const tabs = [
         { label: 'Task Board', listType: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
-        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
-        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-briefcase', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
+        { label: 'My tasks', listType: "clientBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/'+address},
+        { label: 'My jobs', listType: "executorBoard", icon: 'pi pi-fw pi-briefcase', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/'+address },
     ];
 
     const handleRefresh = () => {
