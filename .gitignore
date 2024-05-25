@@ -4,3 +4,4 @@ __pycache__
 artifacts/
 node_modules/
 package-lock.json
+.venv/

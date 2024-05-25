@@ -5,16 +5,11 @@ import { WagmiProvider } from "wagmi";
 import { hardhat, mainnet, sepolia } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// 0. Setup queryClient
 const queryClient = new QueryClient();
-
-// 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "b7c56b70b10e9684c77d1bd3ae3b0e46";
-
-// 2. Create wagmiConfig
+const projectId = "d8508451f407b323527546cef2c2af8a";
 const metadata = {
-  name: "Web3Modal",
-  description: "Web3Modal Example",
+  name: "ETHBerlin",
+  description: "ETHBelin 2024 Hackathon Project",
   url: "http://localhost:5173/", // origin must match your domain & subdomain
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
