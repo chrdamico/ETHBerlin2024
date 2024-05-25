@@ -11,7 +11,7 @@ import './DataViewWrapper.css';
 import { useAccount, useBalance } from "wagmi";
 
 
-const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
+const DataViewWrapper = ({ apiEndpoint, refresh, listType, onTaskAccept}) => {
     const [items, setItems] = useState([]);
     const [layout, setLayout] = useState('list');
     const [loading, setLoading] = useState(true);
@@ -49,6 +49,9 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
                 .then(data => {
                     console.log("Task taken");
                     onHide();
+                    if (onTaskAccept) {
+                        onTaskAccept(); // Notify the parent component
+                    }
                 });
 
     };
