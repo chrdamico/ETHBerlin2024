@@ -3,7 +3,7 @@ from typing import List
 from django.core.exceptions import PermissionDenied
 from django.forms import model_to_dict
 
-from apps.entities import CreateTaskEntity, UpdateTaskEntity, TaskEntity
+from apps.entities import CreateTaskEntity, UpdateTaskEntity
 from apps.task_board.models import Task
 
 
@@ -26,6 +26,8 @@ class TaskService:
         task = Task.objects.create(
             requester_address=task_to_create.requester_address,
             task_description=task_to_create.task_description,
+            task_title=task_to_create.task_title,
+            price=task_to_create.price,
             deadline=task_to_create.deadline,
             bonus_date=task_to_create.bonus_date,
         )
@@ -40,6 +42,8 @@ class TaskService:
         task.task_description = task_to_update.task_description
         task.bonus_date = task_to_update.bonus_date
         task.deadline = task_to_update.deadline
+        task.price = task_to_update.price
+        task.task_title = task_to_update.task_title
         task.save()
 
         return model_to_dict(task)

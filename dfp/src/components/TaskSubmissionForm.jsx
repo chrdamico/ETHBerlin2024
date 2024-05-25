@@ -31,6 +31,25 @@ const TaskSubmissionForm = () => {
                 prize
             };
             console.log(taskData);
+
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: 'React POST Request Example' })
+            };
+            fetch('https://reqres.in/api/posts', requestOptions)
+                .then(response => response.json())
+                .then(data => this.setState({ postId: data.id }));
+
+            fetch('http://0.0.0.0:8000/api/task/create/')
+                .then((res) => {
+                    console.log(res);
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    setItems(data["items"]);
+                });
             // Perform any further actions with taskData
         }
     };
