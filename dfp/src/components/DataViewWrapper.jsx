@@ -95,7 +95,7 @@ const DataViewWrapper = ({ apiEndpoint, refresh, listType}) => {
                         </div>
                         <div className="p-col-12 p-md-12 item-footer">
                             <div className="p-col-6 p-md-6">
-                                <strong>Requested price:</strong> {item.price}
+                                <strong>Requested price:</strong> {item.price} ◈
                             </div>
                             <div className="p-col-6 p-md-6">
                                 <strong>Crypto Address:</strong> {item.requester_address}

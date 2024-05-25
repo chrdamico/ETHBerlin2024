@@ -104,7 +104,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
                 </div>
 
                 <div className="p-field">
-                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Offered money</label>
+                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Offered money (◈)</label>
                     <InputNumber id="prize" value={prize} onValueChange={(e) => setPrize(e.value)} mode="decimal" className={classNames({'p-invalid': isFieldValid(prize)})} />
                     {isFieldValid(prize) && <small className="p-error">Prize is required.</small>}
                 </div>
