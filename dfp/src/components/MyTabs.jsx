@@ -10,7 +10,7 @@ const MyTabs = () => {
     const tabs = [
         { label: 'Task Board', type: "board", icon: 'pi pi-fw pi-home', apiEndpoint: 'http://0.0.0.0:8000/api/board/list/' },
         { label: 'My tasks', type: "clientBoard", icon: 'pi pi-fw pi-calendar', apiEndpoint: 'http://0.0.0.0:8000/api/board/client/0x1311Cf43001af2a65D3B8222d0C3C14FdaA'},
-        { label: 'My jobs', type: "executorBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14daA00000' },
+        { label: 'My jobs', type: "executorBoard", icon: 'pi pi-fw pi-user', apiEndpoint: 'http://0.0.0.0:8000/api/board/executor/0x1311Cf43001af2a65D3B8222d0C3C14Fd0000' },
     ];
 
     const handleRefresh = () => {

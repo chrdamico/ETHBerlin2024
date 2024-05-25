@@ -9,7 +9,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './DataViewWrapper.css';
 
-const DataViewWrapper = ({ apiEndpoint, refresh, type }) => {
+const DataViewWrapper = ({ apiEndpoint, refresh, type}) => {
     const [items, setItems] = useState([]);
     const [layout, setLayout] = useState('list');
     const [loading, setLoading] = useState(true);
@@ -29,9 +29,24 @@ const DataViewWrapper = ({ apiEndpoint, refresh, type }) => {
     };
 
     const accept = () => {
-        // Add your accept logic here
         console.log('Accepted', currentItem);
-        onHide();
+        const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(
+                    {
+                        executor_address:  "0x1311Cf43001af2a65D3B8222d0C3C14Fd0000",
+                        task_id: currentItem.id
+                    }
+                )
+            };
+            fetch('http://0.0.0.0:8000/api/task/take/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Task taken");
+                    onHide();
+                });
+
     };
 
     const reject = () => {
