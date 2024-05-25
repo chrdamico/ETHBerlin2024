@@ -1,4 +1,3 @@
-/* DataViewExample.css */
 .item-panel {
     margin-bottom: 20px;
 }
@@ -31,8 +30,11 @@
     /* Additional styling for nickname if needed */
 }
 
-
 .left-align {
     text-align: left !important;
 }
 
+.culo-text {
+    text-align: left;
+    padding: 10px;
+}

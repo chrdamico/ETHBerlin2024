@@ -8,7 +8,8 @@ import { Dialog } from 'primereact/dialog';
 import { classNames } from 'primereact/utils';
 import './TaskSubmissionForm.css'; // Import the custom CSS file
 import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css'; // this is important for the icons
+import 'primeicons/primeicons.css';
+import {useAccount} from "wagmi"; // this is important for the icons
 
 const TaskSubmissionForm = ({ onTaskSubmit }) => {
     const [taskName, setTaskName] = useState('');
@@ -18,6 +19,8 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
     const [prize, setPrize] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [isDialogVisible, setIsDialogVisible] = useState(false);
+
+     const { address, isConnected } = useAccount();
 
     const handleSubmit = () => {
         setSubmitted(true);
@@ -37,10 +40,11 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(
                     {
-                        requester_address:  "0x1311Cf43001af2a65D3B8222d0C3C14FdaA",
+                        requester_address:  address,
                         task_description: taskDescription,
                         task_title: taskName,
                         price: prize,
+                        task_chain_id: 798432,
                         deadline:  deadlineDate,
                         bonus_date: bonusDate
                     }
@@ -104,7 +108,7 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
                 </div>
 
                 <div className="p-field">
-                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Offered money</label>
+                    <label htmlFor="prize" className={classNames({'p-error': isFieldValid(prize)})}>Offered money (◈)</label>
                     <InputNumber id="prize" value={prize} onValueChange={(e) => setPrize(e.value)} mode="decimal" className={classNames({'p-invalid': isFieldValid(prize)})} />
                     {isFieldValid(prize) && <small className="p-error">Prize is required.</small>}
                 </div>

@@ -4,6 +4,7 @@ from django.db import models
 class Task(models.Model):
     requester_address = models.CharField(max_length=40)
     executor_address = models.CharField(max_length=40, null=True, blank=True, default=None)
+    chain_task_id = models.IntegerField()
     task_title = models.CharField(max_length=120)
     task_description = models.TextField()
     price = models.FloatField()

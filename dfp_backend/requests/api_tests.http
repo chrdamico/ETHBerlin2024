@@ -26,6 +26,7 @@ Accept: application/json
   "task_description": "test 5",
   "task_title": "test title",
   "price": 7.9,
+  "chain_task_id": 30,
   "deadline":  "2024-06-30T01:30:00",
   "bonus_date": "2024-06-15T01:30:00"
 }
