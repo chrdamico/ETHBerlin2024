@@ -38,8 +38,6 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
         error: allowanceError,
         isLoading: isAllowanceLoading,
       } = readAllowance(address);
-      
-      console.log("here:")
       console.log(allowanceError);
       console.log(allowance);
 
