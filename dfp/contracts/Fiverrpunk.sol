@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "./Ownable.sol";
+import "./openzeppelin/Ownable.sol";
 import "./IFiverrpunk.sol";
 import "./TrustComputer.sol";
 

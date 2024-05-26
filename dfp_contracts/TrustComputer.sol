@@ -12,7 +12,7 @@ contract TrustComputer {
         uint256 totalPrize,
         uint256 totalValue
      */
-    function computeTrust(address _user) external view returns (uint256) {
+    function computeTrust(address _user) external pure returns (uint256) {
         return 100;
     }
 }
