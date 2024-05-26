@@ -33,13 +33,14 @@ const TaskSubmissionForm = ({ onTaskSubmit }) => {
       taskDescription &&
       prize !== null
     ) {
-      const {
-        data: allowance,
-        error: allowanceError,
-        isLoading: isAllowanceLoading,
-      } = readAllowance(address);
-      console.log(allowanceError);
-      console.log(allowance);
+      // Integration part that does not currently work
+      // const {
+      //   data: allowance,
+      //   error: allowanceError,
+      //   isLoading: isAllowanceLoading,
+      // } = readAllowance(address);
+      // console.log(allowanceError);
+      // console.log(allowance);
 
       const taskData = {
         taskName,
